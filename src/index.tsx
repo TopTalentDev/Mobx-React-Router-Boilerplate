@@ -1,10 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { createContext } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { RootStore } from "./stores/root";
+import { StoreProvider } from "./helpers/store-provider";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const initialRoot = new RootStore();
+
+ReactDOM.render(
+  <StoreProvider value={initialRoot}>
+    <App />
+  </StoreProvider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { TodoList } from "./pages/TodoList";
+import { TodoNew } from "./pages/TodoNew";
+import { Router, Link, RouteComponentProps } from "@reach/router";
+
+let Home = (_: RouteComponentProps) => <div>Home is where you start</div>;
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="list">List</Link> |{" "}
+        <Link to="new">New</Link>
+      </nav>
+      <Router>
+        <Home path="/" />
+        <TodoNew path="new" />
+        <TodoList path="list" />
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
