@@ -1,14 +1,13 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
-import { useStore } from "../helpers/helpers";
 import { TodoItem } from "../components/TodoItem";
-import { useObserver } from "mobx-react-lite";
-import { RouteComponentProps } from "@reach/router";
+import { useStore } from "../helpers/helpers";
 
-export const TodoList = (_: RouteComponentProps) => {
+export const TodoList = observer(props => {
   const rootStore = useStore();
   const { todoStore, userStore } = rootStore;
 
-  return useObserver(() => (
+  return (
     <div className="todo-list">
       <div className="open-todos">
         <span>Open Todos for {userStore.name}</span>
@@ -23,5 +22,5 @@ export const TodoList = (_: RouteComponentProps) => {
         ))}
       </div>
     </div>
-  ));
-};
+  );
+});

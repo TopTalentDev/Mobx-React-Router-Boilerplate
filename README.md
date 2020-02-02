@@ -14,7 +14,9 @@ Currently authentication checks for `__username` key in the `localStorage`. You 
 
 ### Layouts
 
-## Some views can extend `AuthenticatedLayout` by using HoC. In the initial setup, `AuthenticatedLayout` contains navbar which contains links and logout button.
+Some views can extend `AuthenticatedLayout` by using HoC. In the initial setup, `AuthenticatedLayout` contains navbar which contains links and logout button.
+
+---
 
 ## Available Scripts (create-react-app)
 
