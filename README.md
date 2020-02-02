@@ -1,6 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React MobX Boilerplate using hooks, react-mobx-lite and reach router
 
-## Available Scripts
+This boilerplate includes basic router setup with login and logout functionality. It is based on [Create React App](https://create-react-app.dev/).
+
+## Features
+
+### Routes
+
+`routes/all.tsx` includes all the routes. You can protect routes with login functionality that is defined in User store (user.ts). Protecting a route is done via `PrivateRoute` component. You can modify `PrivateRoute` in order to give your preferred login functionality. Current setup checks login status by the `isLoggedIn` computed value in UserStore (See `user.ts`).
+
+### Authentication
+
+Currently authentication checks for `__username` key in the `localStorage`. You can implement your login behaviour the way you like.
+
+### Layouts
+
+## Some views can extend `AuthenticatedLayout` by using HoC. In the initial setup, `AuthenticatedLayout` contains navbar which contains links and logout button.
+
+## Available Scripts (create-react-app)
 
 In the project directory, you can run:
 

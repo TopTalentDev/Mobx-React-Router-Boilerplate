@@ -1,24 +1,37 @@
-import React from "react";
-import { TodoList } from "./pages/TodoList";
-import { TodoNew } from "./pages/TodoNew";
-import { Router, Link, RouteComponentProps } from "@reach/router";
+import { navigate } from "@reach/router";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+import { usePrevious, useStore } from "./helpers/helpers";
+import Routes from "./routes/all";
 
-let Home = (_: RouteComponentProps) => <div>Home is where you start</div>;
+const App: React.FC = observer(props => {
+  const rootStore = useStore();
+  const { userStore } = rootStore;
+  const { isAuthorized, hasCheckedAuth } = userStore;
 
-const App: React.FC = () => {
+  const prevAuthorized = usePrevious(isAuthorized);
+
+  useEffect(() => {
+    console.log("Use effect.");
+    if (!hasCheckedAuth) {
+      userStore.checkLogin();
+    } else {
+      console.log("Has checked login before.");
+      if (!prevAuthorized && isAuthorized) {
+        console.log("LOGGED IN!");
+        navigate("/");
+      } else if (!isAuthorized && prevAuthorized) {
+        console.log("LOGGED OUT");
+        navigate("/login");
+      }
+    }
+  }, [prevAuthorized, isAuthorized, hasCheckedAuth, userStore]);
+
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="list">List</Link> |{" "}
-        <Link to="new">New</Link>
-      </nav>
-      <Router>
-        <Home path="/" />
-        <TodoNew path="new" />
-        <TodoList path="list" />
-      </Router>
+      <Routes />
     </div>
   );
-};
+});
 
 export default App;
